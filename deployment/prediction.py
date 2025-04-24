@@ -8,7 +8,7 @@ with open('model_lr.pkl', 'rb') as file:
     loaded_model = pickle.load(file)
 
 def run():
-    st.title("Sales & Advertising Data Entry Form")
+    st.title("Estimated Ad Performance and Transaction Metrics Form")
     with st.form(key = "marketing_form"):
         st.subheader("Customer Transaction and Ad Performance Form")
         st.write("Please fill in the following transaction and advertising details.")
@@ -27,6 +27,7 @@ def run():
         st.markdown('---')
 
         st.markdown("#### 👩🏻‍💻 Advertising Metrics")
+        st.write("Fill in the values based on your goals for the campaign, such as the desired number of clicks, impressions, conversion rate, and cost-per-click (CPC).")
         col1, col2 = st.columns(2)
         with col1:
             clicks = st.number_input("Clicks", min_value = 0, step = 1)
@@ -63,7 +64,7 @@ def run():
         st.success("Data submitted successfully!")
         predict = loaded_model.predict(data)
         st.subheader("🔍 Predicted result")
-        st.metric(label = "Predicted target", value = round(predict[0], 5))
+        st.metric(label = "Estimated Budget Required", value = round(predict[0], 5))
 
 if __name__ == '__main__':
     run()
